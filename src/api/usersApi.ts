@@ -7,18 +7,7 @@ const instance = axios.create({
 
 const usersApi = {
 	fetchUsers: (): Promise<AxiosResponse<Array<IUser>>> => {
-		return instance.get('/users', {
-			params: {
-				_limit: 10
-			}
-		})
-	},
-	getUserById: (id: string): Promise<AxiosResponse<Array<IUser>>> => {
-		return instance.get('/users', {
-			params: {
-				id
-			}
-		})
+		return instance.get('/users')
 	},
 	fetchPostsByUserId: (userId: string): Promise<AxiosResponse<Array<IPost>>> => {
 		return instance.get('/posts', {

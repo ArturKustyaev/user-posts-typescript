@@ -1,13 +1,12 @@
-import { PostList, Slider } from 'components'
+import { Container, PostList, Slider } from 'components'
 import { useFetchUserPosts, useFetchUsers } from 'hooks'
 import { FC } from 'react'
-import { Container } from 'ui-kit'
 import './MainPage.sass'
 
 export const MainPage: FC = (): JSX.Element => {
-	const { users, error } = useFetchUsers()
-	
-	const { posts } = useFetchUserPosts()
+	const { users, error: fetchUsersError } = useFetchUsers()
+
+	const { posts, error: fetchPostsError } = useFetchUserPosts()
 
 	return (
 		<Container>
@@ -18,10 +17,12 @@ export const MainPage: FC = (): JSX.Element => {
 				средний опыт работы в профессии - 27 лет
 			</p>
 
-			{error && <span>{error}</span>}
-			<Slider data={users} />
+			{fetchUsersError && <span className='fetch-error'>{fetchUsersError}</span>}
+			{!fetchUsersError && <Slider data={users} />}
 
-			<PostList posts={posts} />
+			{fetchPostsError && <span className='fetch-error'>{fetchPostsError}</span>}
+
+			{!fetchPostsError && <PostList posts={posts} />}
 		</Container>
 	)
 }

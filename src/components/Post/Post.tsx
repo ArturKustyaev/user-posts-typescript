@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { FC, HTMLAttributes } from 'react'
-import './Post.css'
+import './Post.sass'
 
 export interface IPost {
 	id: string

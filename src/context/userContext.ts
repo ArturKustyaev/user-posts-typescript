@@ -3,16 +3,17 @@ import { createContext } from 'react'
 
 interface IUserContext {
 	users: Array<IUser>
-	setUsers: (users: Array<IUser>) => void
 	selectedUserIndex: number
+	setUsers: (users: Array<IUser>) => void
+
 	setIndex: (index: number) => void
 }
 
-const context: IUserContext = {
+const initialState: IUserContext = {
 	users: [],
+	selectedUserIndex: -1,
 	setUsers: () => {},
-	selectedUserIndex: 0,
 	setIndex: () => {}
 }
 
-export const UserContext = createContext<IUserContext>(context)
+export const UserContext = createContext<IUserContext>(initialState)

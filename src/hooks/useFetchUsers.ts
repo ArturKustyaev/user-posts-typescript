@@ -20,7 +20,7 @@ const useFetchUsers = () => {
 			.catch(() => {
 				setError('Ошибка при загрузке пользователей!')
 			})
-	}, [])
+	}, [setUsers])
 
 	useEffect(() => {
 		if (id) {

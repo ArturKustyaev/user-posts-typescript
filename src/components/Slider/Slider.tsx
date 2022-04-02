@@ -1,12 +1,13 @@
-import { UserCard } from 'components'
+import { IUser, UserCard } from 'components'
 import { UserContext } from 'context'
 import { FC, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Arrow from '../../assets/img/arrow.svg'
+import figure from '../../assets/img/figure.svg'
 import './Slider.sass'
 
 interface Props {
-	data: any
+	data: Array<IUser>
 }
 
 export const Slider: FC<Props> = ({ data }): JSX.Element => {
@@ -28,30 +29,31 @@ export const Slider: FC<Props> = ({ data }): JSX.Element => {
 	}, [selectedUserIndex])
 
 	return (
-		<div className='ui-slider'>
-			<div className='ui-slider__navigation'>
+		<div className='slider'>
+			<img className='slider__bg' src={figure} alt='' />
+			<div className='slider__navigation'>
 				<button
-					className='ui-slider__button ui-slider__button--prev'
+					className='slider__button slider__button--prev'
 					onClick={prevClick}
-					disabled={selectedUserIndex === 0}
+					disabled={selectedUserIndex === -1 || selectedUserIndex === 0}
 				>
 					<img src={Arrow} alt='arrow' />
 				</button>
 				<button
-					className='ui-slider__button'
+					className='slider__button'
 					onClick={nextClick}
-					disabled={selectedUserIndex === users?.length - 1}
+					disabled={selectedUserIndex === -1 || selectedUserIndex === users.length - 1}
 				>
 					<img src={Arrow} alt='arrow' />
 				</button>
 			</div>
-			<div className='ui-slider__slide-wrapper'>
+			<div className='slider__slide-wrapper'>
 				{data.map((item: any) => (
 					<div
-						className='ui-slider__slide'
+						className='slider__slide'
 						key={item.id}
 						style={{
-							transform: `translate(${selectedUserIndex * -100}%)`
+							transform: `translate(${selectedUserIndex !== -1 && selectedUserIndex * -100}%)`
 						}}
 					>
 						<UserCard user={item} />

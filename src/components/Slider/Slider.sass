@@ -1,5 +1,11 @@
-.ui-slider
+.slider
     margin-bottom: 51px
+    position: relative
+
+    &__bg
+        position: absolute
+        right: 0
+        top: 0
 
     &__navigation
         display: flex
@@ -31,7 +37,9 @@
 
     &__slide-wrapper
         overflow-x: scroll
+        position: relative
         white-space: nowrap
+        z-index: 100
 
         &::-webkit-scrollbar
             width: 0
@@ -40,3 +48,9 @@
         transition: transform 0.2s ease
         display: inline-block
         margin-right: 34px
+
+@media screen and (max-width: 900px)
+    .slider
+
+        &__bg
+            display: none

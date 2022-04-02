@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { FC, HTMLAttributes, ReactNode } from 'react'
-import './Container.css'
+import './Container.sass'
 
 interface IContainerProps extends HTMLAttributes<HTMLDivElement> {
 	className?: string

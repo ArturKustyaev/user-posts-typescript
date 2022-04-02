@@ -7,7 +7,6 @@ import './UserCard.sass'
 export interface IUser {
 	id: number
 	name: string
-	photoUrl: string
 	company: {
 		name: string
 	}
