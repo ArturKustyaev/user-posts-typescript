@@ -2,10 +2,10 @@ import classNames from 'classnames'
 import { UserContext } from 'context'
 import { FC, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './UserCard.css'
+import './UserCard.sass'
 
 export interface IUser {
-	id: string
+	id: number
 	name: string
 	photoUrl: string
 	company: {
@@ -19,13 +19,20 @@ interface Props {
 
 export const UserCard: FC<Props> = ({ user }): JSX.Element => {
 	const navigate = useNavigate()
+	const { users, selectedUserIndex, setIndex } = useContext(UserContext)
 
 	const clickHandler = () => {
 		navigate('?userId=' + user.id)
+		setIndex(users.indexOf(user))
 	}
 
 	return (
-		<div className={classNames('userCard')} onClick={clickHandler}>
+		<div
+			className={classNames('userCard', {
+				'userCard--active': user.id === users[selectedUserIndex]?.id
+			})}
+			onClick={clickHandler}
+		>
 			<div className='userCard__photoWrapper'>
 				<img className='userCard__photo' src={'https://i.pravatar.cc/'} alt='avatar' />
 			</div>

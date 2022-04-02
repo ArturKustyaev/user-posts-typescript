@@ -1,16 +1,15 @@
+import { IUser } from 'components/UserCard'
 import { UserContext } from 'context'
 import { MainPage } from 'pages'
 import { FC, useState } from 'react'
-import { BrowserRouter } from 'react-router-dom'
 
 export const App: FC = (): JSX.Element => {
-	const [user, setUser] = useState<any>({})
+	const [users, setUsers] = useState<Array<IUser>>([])
+	const [selectedUserIndex, setIndex] = useState<number>(0)
 
 	return (
-		<UserContext.Provider value={{ user, setUser }}>
-			<BrowserRouter>
-				<MainPage />
-			</BrowserRouter>
+		<UserContext.Provider value={{ users, setUsers, selectedUserIndex, setIndex }}>
+			<MainPage />
 		</UserContext.Provider>
 	)
 }

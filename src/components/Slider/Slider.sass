@@ -1,0 +1,42 @@
+.ui-slider
+    margin-bottom: 51px
+
+    &__navigation
+        display: flex
+        margin: 0 auto 20px auto
+        max-width: 120px
+
+    &__button
+        width: 48px
+        height: 48px
+        background-color: #FE8700
+        outline: none
+        border: none
+        border-radius: 50%
+        display: flex
+        justify-content: center
+        align-items: center
+        cursor: pointer
+
+        &:hover
+            background-color: lighten( #FE8700, 5%)
+
+        &:disabled
+            background-color: lighten( #FE8700, 15%)
+            cursor: default
+
+        &--prev
+            transform: rotate(-180deg)
+            margin-right: 19px
+
+    &__slide-wrapper
+        overflow-x: scroll
+        white-space: nowrap
+
+        &::-webkit-scrollbar
+            width: 0
+
+    &__slide
+        transition: transform 0.2s ease
+        display: inline-block
+        margin-right: 34px

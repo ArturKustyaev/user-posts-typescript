@@ -2,15 +2,21 @@ import axios, { AxiosResponse } from 'axios'
 import { IPost, IUser } from 'components'
 
 const instance = axios.create({
-	baseURL: 'https://jsonplaceholder.typicode.com',
-	timeout: 5000
+	baseURL: 'https://jsonplaceholder.typicode.com'
 })
 
 const usersApi = {
 	fetchUsers: (): Promise<AxiosResponse<Array<IUser>>> => {
 		return instance.get('/users', {
 			params: {
-				_limit: 4
+				_limit: 10
+			}
+		})
+	},
+	getUserById: (id: string): Promise<AxiosResponse<Array<IUser>>> => {
+		return instance.get('/users', {
+			params: {
+				id
 			}
 		})
 	},

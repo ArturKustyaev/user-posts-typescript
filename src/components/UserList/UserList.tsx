@@ -1,7 +1,7 @@
 import { IUser } from 'components'
 import UserCard from 'components/UserCard'
 import { FC } from 'react'
-import './UserList.css'
+import './UserList.sass'
 
 interface Props {
 	users: Array<IUser>

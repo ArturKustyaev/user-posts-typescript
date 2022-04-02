@@ -1,38 +1,27 @@
-import { usersApi } from 'api'
-import { IPost, IUser, PostList, UserList } from 'components'
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { PostList, Slider } from 'components'
+import { useFetchUserPosts, useFetchUsers } from 'hooks'
+import { FC } from 'react'
 import { Container } from 'ui-kit'
-import './MainPage.css'
+import './MainPage.sass'
 
-export const MainPage = () => {
-	const [users, setUsers] = useState<Array<IUser>>([])
-	const [posts, setPosts] = useState<Array<IPost>>([])
-	const [searchParams] = useSearchParams()
-	const id = searchParams.get('userId')
-
-	useEffect(() => {
-		usersApi.fetchUsers().then(response => {
-			setUsers(response.data)
-		})
-	}, [])
-
-	useEffect(() => {
-		if (id) {
-			usersApi.fetchPostsByUserId(id).then(response => {
-				setPosts(response.data)
-			})
-		}
-	}, [id])
+export const MainPage: FC = (): JSX.Element => {
+	const { users, error } = useFetchUsers()
+	
+	const { posts } = useFetchUserPosts()
 
 	return (
 		<Container>
 			<h1 className='mainPage__title'>Наши топ-блогеры</h1>
 			<p className='mainPage__subtitle'>
-				Лучше специалисты в своем деле,<br/> средний опыт работы в профессии - 27 лет
+				Лучше специалисты в своем деле,
+				<br />
+				средний опыт работы в профессии - 27 лет
 			</p>
-			<UserList users={users} />
-			{posts.length !== 0 && <PostList posts={posts} username={id} />}
+
+			{error && <span>{error}</span>}
+			<Slider data={users} />
+
+			<PostList posts={posts} />
 		</Container>
 	)
 }

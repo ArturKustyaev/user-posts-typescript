@@ -8,7 +8,7 @@ interface ILoaderProps extends HTMLAttributes<HTMLDivElement> {
 export const Loader: FC<ILoaderProps> = ({ className, ...rest }): JSX.Element => {
 	return (
 		<div className='ui-loader-wrapper'>
-			<div className={classNames('ui-loader', className)} {...rest}></div>
+			<div className={classNames('ui-loader', className)} {...rest}>загрузка...</div>
 		</div>
 	)
 }
