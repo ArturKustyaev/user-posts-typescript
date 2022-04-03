@@ -1,3 +1,1 @@
-import { Slider } from './Slider'
-
-export { Slider as default }
+export { Slider as default } from './Slider'

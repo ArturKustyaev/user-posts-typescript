@@ -1,7 +1,7 @@
 import { Container, PostList, Slider } from 'components'
 import { useFetchUserPosts, useFetchUsers } from 'hooks'
 import { FC } from 'react'
-import './MainPage.sass'
+import { StyledFetchError, StyledMainPageSubtitle, StyledMainPageTitle } from './MainPage.styles'
 
 export const MainPage: FC = (): JSX.Element => {
 	const { users, error: fetchUsersError } = useFetchUsers()
@@ -10,18 +10,17 @@ export const MainPage: FC = (): JSX.Element => {
 
 	return (
 		<Container>
-			<h1 className='mainPage__title'>Наши топ-блогеры</h1>
-			<p className='mainPage__subtitle'>
+			<StyledMainPageTitle>Наши топ-блогеры</StyledMainPageTitle>
+			<StyledMainPageSubtitle>
 				Лучше специалисты в своем деле,
 				<br />
 				средний опыт работы в профессии - 27 лет
-			</p>
+			</StyledMainPageSubtitle>
 
-			{fetchUsersError && <span className='fetch-error'>{fetchUsersError}</span>}
+			{fetchUsersError && <StyledFetchError>{fetchUsersError}</StyledFetchError>}
 			{!fetchUsersError && <Slider data={users} />}
 
-			{fetchPostsError && <span className='fetch-error'>{fetchPostsError}</span>}
-
+			{fetchPostsError && <StyledFetchError>{fetchPostsError}</StyledFetchError>}
 			{!fetchPostsError && <PostList posts={posts} />}
 		</Container>
 	)

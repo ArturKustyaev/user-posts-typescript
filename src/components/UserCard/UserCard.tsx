@@ -1,8 +1,13 @@
-import classNames from 'classnames'
 import { UserContext } from 'context'
 import { FC, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './UserCard.sass'
+import {
+	StyledUserCard,
+	StyledUserCardCompanyName,
+	StyledUserCardName,
+	StyledUserCardPhoto,
+	StyledUserCardPhotoWrapper
+} from './UserCard.styles'
 
 export interface IUser {
 	id: number
@@ -19,6 +24,7 @@ interface Props {
 export const UserCard: FC<Props> = ({ user }): JSX.Element => {
 	const navigate = useNavigate()
 	const { users, selectedUserIndex, setIndex } = useContext(UserContext)
+	const isActiveUser = user.id === users[selectedUserIndex]?.id
 
 	const clickHandler = () => {
 		navigate('?userId=' + user.id)
@@ -26,19 +32,14 @@ export const UserCard: FC<Props> = ({ user }): JSX.Element => {
 	}
 
 	return (
-		<div
-			className={classNames('userCard', {
-				'userCard--active': user.id === users[selectedUserIndex]?.id
-			})}
-			onClick={clickHandler}
-		>
-			<div className='userCard__photoWrapper'>
-				<img className='userCard__photo' src={'https://i.pravatar.cc/'} alt='avatar' />
-			</div>
-			<div className='userCard__info'>
-				<p className='userCard__name'>{user.name}</p>
-				<p className='userCard__companyName'>{user.company.name}</p>
-			</div>
-		</div>
+		<StyledUserCard onClick={clickHandler}>
+			<StyledUserCardPhotoWrapper isActiveUser={isActiveUser}>
+				<StyledUserCardPhoto src={'https://i.pravatar.cc/'} alt='avatar' />
+			</StyledUserCardPhotoWrapper>
+			<StyledUserCardName isActiveUser={isActiveUser}>{user.name}</StyledUserCardName>
+			<StyledUserCardCompanyName isActiveUser={isActiveUser}>
+				{user.company.name}
+			</StyledUserCardCompanyName>
+		</StyledUserCard>
 	)
 }

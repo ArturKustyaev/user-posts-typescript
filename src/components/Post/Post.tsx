@@ -1,6 +1,5 @@
-import classNames from 'classnames'
 import { FC, HTMLAttributes } from 'react'
-import './Post.sass'
+import { StyledPostBody, StyledPostTitle } from './Post.styles'
 
 export interface IPost {
 	id: string
@@ -9,15 +8,14 @@ export interface IPost {
 }
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-	className?: string
 	post: IPost
 }
 
-export const Post: FC<Props> = ({ className, post, ...rest }) => {
+export const Post: FC<Props> = ({ post, ...rest }) => {
 	return (
-		<div className={classNames('post', className)} {...rest}>
-			<h2 className='post__title'>{post.title}</h2>
-			<p className='post__body'>{post.body}</p>
+		<div {...rest}>
+			<StyledPostTitle>{post.title}</StyledPostTitle>
+			<StyledPostBody>{post.body}</StyledPostBody>
 		</div>
 	)
 }

@@ -1,16 +1,10 @@
-import classNames from 'classnames'
-import { FC, HTMLAttributes, ReactNode } from 'react'
-import './Container.sass'
+import { FC, ReactNode } from 'react'
+import { StyledContainer } from './Container.styles'
 
-interface IContainerProps extends HTMLAttributes<HTMLDivElement> {
-	className?: string
+interface Props {
 	children?: ReactNode
 }
 
-export const Container: FC<IContainerProps> = ({ className, children, ...rest }): JSX.Element => {
-	return (
-		<div className={classNames('container', className)} {...rest}>
-			{children}
-		</div>
-	)
+export const Container: FC<Props> = ({ children }): JSX.Element => {
+	return <StyledContainer>{children}</StyledContainer>
 }

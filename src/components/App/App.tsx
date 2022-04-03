@@ -1,4 +1,4 @@
-import { IUser } from 'components/UserCard'
+import { IUser } from 'components'
 import { UserContext } from 'context'
 import { MainPage } from 'pages'
 import { FC, useState } from 'react'
